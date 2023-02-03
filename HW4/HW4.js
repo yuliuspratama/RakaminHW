@@ -2,10 +2,12 @@ let angka_acak =[]
 let array_genap =[]
 let array_ganjil =[]
 
+//inisialisasi nilai random
 for (let i=0;i<=99;i++){
     angka_acak[i]= Math.floor(Math.random() * 50) + 1;
 }
 
+//pembagian index Genap dan Ganjil
 for (angka in angka_acak){
     if((angka % 2) == 0){
     array_genap.push(angka_acak[angka])

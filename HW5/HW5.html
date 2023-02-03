@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YuliusPratama-Corp</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">YuliusPratama-Corp</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" type="button" onclick="tombolDaftar()" >Daftar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" type="button" onclick="tombolList()">List Pendaftar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+    <!-- navbar End -->
+<div id="Utama">
+    <!-- form -->
+    <div id="formPendaftaran">
+    <form class="row g-3">
+      <h1 class="text-md-center">Pendaftaran</h1>
+    <div class="input-group">
+        <span class="input-group-text">Nama</span>
+        <input id="Name" type="text" aria-label="Name" class="form-control">
+    </div>
+        <div class="input-group">
+        <span class="input-group-text">Umur</span>
+        <input id="Umur" type="number" aria-label="Umur" class="form-control">
+    </div>
+        <div class="input-group">
+        <span class="input-group-text">Uang Sangu</span>
+        <input id="Uang" type="number" aria-label="Uang" class="form-control">
+    </div>
+    <button  type="button" class="btn btn-primary mb-3 align-self-center" onclick="submitdata()">Daftar</button>
+    </form>
+  </div>
+    <!-- form End -->
+    <h1 id="Judul_Daftar_peserta" class="text-md-center m-2"></h1>
+    <div class="d-flex justify-content-center table" id="table"></div>
+<p class="text-center" id="rata"></p>
+</div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+      <script>
+        let data_pendaftar=[]
+
+        class Web {
+          constructor(){
+          }
+
+          hapusTable(){
+            const hapus1 = document.getElementById('rata')
+            hapus1.innerHTML = null
+            const hapus2 = document.getElementById("table")
+            hapus2.innerHTML=null
+            const hapus3 = document.getElementById("Judul_Daftar_peserta")
+            hapus3.innerHTML=null
+          }
+
+          headerTable(){
+            const Juduldaftar = document.getElementById("Judul_Daftar_peserta")
+            Juduldaftar.innerHTML="Daftar Peserta"
+            const thead = document.createElement('thead')
+            thead.id ="thed"
+            const theas1 = document.getElementById("table")
+            theas1.className="d-flex justify-content-center table"
+            const tr = document.createElement("tr")
+            tr.className="align-middle text-center"
+            const Headnomortext = document.createElement("th")
+            Headnomortext.innerText="Nomor"
+            Headnomortext.scope="col"
+            const HeadNamatext = document.createElement("th")
+            HeadNamatext.innerHTML="Nama"
+            HeadNamatext.scope="col"
+            const HeadUmurtext = document.createElement("th")
+            HeadUmurtext.innerHTML="Umur"
+            HeadUmurtext.scope="col"
+            const HeadUangtext = document.createElement("th") 
+            HeadUangtext.innerHTML = "Uang"
+            HeadUangtext.scope="col"
+            const table = document.createElement("table") 
+            table.className="table"
+            table.id="tble"
+            tr.append(Headnomortext,HeadNamatext,HeadUmurtext,HeadUangtext)
+            thead.appendChild(tr)
+            table.append(thead)
+            theas1.appendChild(table)
+          }
+
+          hapusForm(){
+            const hapus = document.getElementById('formPendaftaran')
+            hapus.innerHTML = null
+          }
+
+          munculForm(){
+            const formPendaftaran = document.getElementById("formPendaftaran")
+            const form = document.createElement('form')
+            form.className="row g-3"
+
+            const judul = document.createElement('h1')
+            judul.className="text-md-center"
+            judul.innerHTML="Pendaftaran"
+
+            const div1 = document.createElement("div")
+            div1.className="input-group"
+            const span1 = document.createElement("span")
+            span1.className="input-group-text"
+            span1.innerHTML="Nama"
+            const input1 = document.createElement("input")
+            input1.id="Name"
+            input1.type="text"
+            input1.ariaLabel="Name"
+            input1.className="form-control"
+            div1.append(span1,input1)
+            
+            const div2 = document.createElement("div")
+            div2.className="input-group"
+            const span2 = document.createElement("span")
+            span2.className="input-group-text"
+            span2.innerHTML="Umur"
+            const input2 = document.createElement("input")
+            input2.id="Umur"
+            input2.type="number"
+            input2.ariaLabel="Umur"
+            input2.className="form-control"
+            div2.append(span2,input2)
+
+            const div3 = document.createElement("div")
+            div3.className="input-group"
+            const span3 = document.createElement("span")
+            span3.className="input-group-text"
+            span3.innerHTML="Uang Sangu"
+            const input3 = document.createElement("input")
+            input3.id="Uang"
+            input3.type="number"
+            input3.ariaLabel="Uang"
+            input3.className="form-control"
+            div3.append(span3,input3)
+
+            const button1 = document.createElement("button")
+            button1.type="button"
+            button1.className="btn btn-primary mb-3 align-self-center"
+            button1.setAttribute('onclick' ,'submitdata()')
+            button1.innerHTML="Daftar"
+
+            form.append(judul,div1,div2,div3,button1)
+            formPendaftaran.appendChild(form)
+          }
+
+        }
+
+  
+
+
+
+
+        function tampilrata(){
+          let rataUang = 0
+          let rataUmur = 0
+          let banyakPeserta = data_pendaftar.length
+          if (banyakPeserta == 0){
+            const rata = document.getElementById("rata")
+            rata.innerHTML="MOHON MASUKKAN DATA TERLEBIH DAHULU"
+          } else {
+            for (peserta in data_pendaftar){
+              const umur= data_pendaftar[peserta].Umur
+              const uang= data_pendaftar[peserta].Uang
+              rataUang = rataUang + Number(uang)
+              rataUmur = rataUmur + Number(umur)
+              }
+              rataUang = rataUang / banyakPeserta
+              rataUmur = rataUmur / banyakPeserta
+              const rata = document.getElementById("rata")
+              rata.innerHTML="Rata rata pendaftar memiliki uang sangu sebesar "+ rataUang +" dengan rata rata umur " + rataUmur + " jumlah peserta "+banyakPeserta+" "
+              console.log(rataUmur)
+              console.log(rataUang)
+          }
+
+
+        }
+
+        function tampilTable(){
+            for (peserta in data_pendaftar){
+                const name= data_pendaftar[peserta].Nama
+                const umur= data_pendaftar[peserta].Umur
+                const uang= data_pendaftar[peserta].Uang
+                const tbody = document.createElement('tbody')
+                tbody.className="table"
+                const theas1 = document.getElementById("tble")
+                //theas1.className="table"
+                const tr = document.createElement("tr")
+                tr.className="align-middle text-center"
+                const Bodynomortext = document.createElement("th")
+                peserta++
+                Bodynomortext.innerText= peserta
+                peserta--
+                Bodynomortext.scope="row"
+                const BodyNamatext = document.createElement("td")
+                BodyNamatext.innerHTML= name
+                const BodyUmurtext = document.createElement("td")
+                BodyUmurtext.innerHTML= umur
+                const BodyUangtext = document.createElement("td") 
+                BodyUangtext.innerHTML = uang           
+                tr.append(Bodynomortext,BodyNamatext,BodyUmurtext,BodyUangtext)
+                tbody.append(tr)
+                theas1.append(tbody)
+            }          
+            console.log("List pendaftar")
+            
+        }
+        
+        function submitdata(){
+            const nama_input = document.getElementById("Name")
+            const umur_input = document.getElementById("Umur")
+            const uang_input = document.getElementById("Uang")
+            if( !nama_input.value || !umur_input.value || !uang_input.value  ){
+                alert("Mohon isi form yang kosong")
+            }else if(nama_input.value.length <= 10 ){
+                alert("Nama Minimal 10 karakter")
+            }else if (umur_input.value <= 25){
+                alert("minimal Umur 25")
+            }else if (uang_input.value <= 99999 || uang_input.value >= 1000001  ){
+                alert("Masukkan uang antara 100.000 sampai 1000000")
+            } else {
+            data_pendaftar.push({"Nama":nama_input.value,"Umur":umur_input.value,"Uang":uang_input.value})
+            console.log(data_pendaftar)
+            console.log("sumbit data")
+            alert("Sukses Input data")
+            }
+        }
+
+        function tombolDaftar(){
+          const webTampil = new Web()
+          webTampil.hapusForm()
+          webTampil.hapusTable()
+          webTampil.munculForm()
+        }
+
+        function tombolList(){
+          const webTampil = new Web()
+          webTampil.hapusForm()
+          webTampil.hapusTable()
+          webTampil.headerTable()
+          tampilTable()
+          tampilrata()
+        }
+    </script>
+</html>
