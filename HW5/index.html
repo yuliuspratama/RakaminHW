@@ -224,9 +224,9 @@
             const uang_input = document.getElementById("Uang")
             if( !nama_input.value || !umur_input.value || !uang_input.value  ){
                 alert("Mohon isi form yang kosong")
-            }else if(nama_input.value.length <= 10 ){
+            }else if(nama_input.value.length <= 9 ){
                 alert("Nama Minimal 10 karakter")
-            }else if (umur_input.value <= 25){
+            }else if (umur_input.value <= 24){
                 alert("minimal Umur 25")
             }else if (uang_input.value <= 99999 || uang_input.value >= 1000001  ){
                 alert("Masukkan uang antara 100.000 sampai 1000000")
