@@ -44,7 +44,7 @@
         <span class="input-group-text">Uang Sangu</span>
         <input id="Uang" type="number" aria-label="Uang" class="form-control">
     </div>
-    <button  type="button" class="btn btn-primary mb-3 align-self-center" onclick="submitdata()">Daftar</button>
+    <button  type="button" id="tombol" class="btn btn-primary mb-3 align-self-center" onclick="submitdata()">Daftar</button>
     </form>
   </div>
     <!-- form End -->
@@ -151,6 +151,7 @@
             div3.append(span3,input3)
 
             const button1 = document.createElement("button")
+            button1.id="tombol"
             button1.type="button"
             button1.className="btn btn-primary mb-3 align-self-center"
             button1.setAttribute('onclick' ,'submitdata()')
@@ -161,11 +162,6 @@
           }
 
         }
-
-  
-
-
-
 
         function tampilrata(){
           let rataUang = 0
@@ -235,10 +231,28 @@
             }else if (uang_input.value <= 99999 || uang_input.value >= 1000001  ){
                 alert("Masukkan uang antara 100.000 sampai 1000000")
             } else {
-            data_pendaftar.push({"Nama":nama_input.value,"Umur":umur_input.value,"Uang":uang_input.value})
-            console.log(data_pendaftar)
-            console.log("sumbit data")
-            alert("Sukses Input data")
+              const button2 = document.getElementById("tombol")
+              button2.innerHTML="Data sedang di proses"
+              button2.className="btn btn-warning disabled"
+              setTimeout(function(){
+                data_pendaftar.push({"Nama":nama_input.value,"Umur":umur_input.value,"Uang":uang_input.value})
+                console.log(data_pendaftar)
+                const button3 = document.getElementById("tombol")
+                button3.innerHTML="Data Telah tersimpan"
+                button3.className="btn btn-success disabled"
+                alert("Sukses Input data")
+                const button4 = document.getElementById("tombol")
+                button4.innerHTML="Daftar"
+                button4.className="btn btn-primary enable"
+              },4000)
+
+              setTimeout(function(){
+                const button3 = document.getElementById("tombol")
+                button3.innerHTML="Data Telah tersimpan"
+                button3.className="btn btn-success disabled"
+              },3000)
+
+
             }
         }
 
