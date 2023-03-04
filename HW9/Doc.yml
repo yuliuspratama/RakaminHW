@@ -1,0 +1,418 @@
+openapi: '3.0.2'
+info:
+  title: 'API Databases 3.0'
+  description: >-
+    "Dokumentasi Movies API"
+  version: '1.0'
+servers:
+  - url: http://localhost:3000
+tags:
+  - name: Movies
+    description : Movies List
+paths:
+  /:
+    get:
+      description: ''
+      parameters: [
+        { 
+          name : "aksestoken",
+          in: header,
+          schema: 
+          {$ref: '#/components/schemas/akses'}
+        }
+
+      ]
+      responses:
+        '200':
+          description: OK
+  /Register/:
+    post:
+      tags:
+        - "Public"
+      description: ''
+      requestBody: {
+        content: {
+        application/json: {
+        schema: 
+          {$ref: '#/components/schemas/register'}
+        }
+        }
+        }
+      responses:
+        '200':
+          description: OK
+  /Login/:
+    post:
+      tags:
+        - "Public"
+      description: ''
+      requestBody: {
+        content: {
+        application/json: {
+        schema: 
+          {$ref: '#/components/schemas/login'}
+        }
+        }
+        }
+      parameters: []
+      responses:
+        '200':
+          description: OK
+  /Movies/:
+    get:
+      tags:
+        - "Movies"
+      description: ''
+      parameters: [
+        { 
+          name : "aksestoken",
+          in: header,
+          schema: 
+          {$ref: '#/components/schemas/akses'}
+        }
+
+      ]
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+        - "Movies"
+      description: 'Input Movies Baru'
+      parameters: [
+        { 
+          name : "aksestoken",
+          in: header,
+          schema: 
+          {$ref: '#/components/schemas/akses'}
+        }
+      ]
+      requestBody: {
+        content: {
+        application/json: {
+        schema: 
+          {$ref: '#/components/schemas/createMovie'}
+        }
+        }
+        }
+      responses:
+        '200':
+          description: OK
+    put:
+      tags:
+        - "Movies"
+      description: 'Input Movies Baru'
+      parameters: [
+        { 
+          name : "aksestoken",
+          in: header,
+          schema: 
+          {$ref: '#/components/schemas/akses'}
+        }
+      ]
+      requestBody: {
+        content: {
+        application/json: {
+        schema: 
+          {$ref: '#/components/schemas/updateMovie'}
+        }
+        }
+        }
+      responses:
+        '200':
+          description: OK
+    delete:
+      tags:
+        - "Movies"
+      description: 'Input Movies Baru'
+      parameters: [
+        { 
+          name : "aksestoken",
+          in: header,
+          schema: 
+          {$ref: '#/components/schemas/akses'}
+        }
+      ]
+      requestBody: {
+        content: {
+        application/json: {
+        schema: 
+          {$ref: '#/components/schemas/deleteMovie'}
+        }
+        }
+        }
+      responses:
+        '200':
+          description: OK
+
+  /Users/:
+    get:
+      description: ''
+      parameters: [
+        { 
+          name : "aksestoken",
+          in: header,
+          schema: 
+          {$ref: '#/components/schemas/akses'}
+        }
+      ]
+      responses:
+        '200':
+          description: OK
+    post:
+      description: ''
+      parameters: [
+        { 
+          name : "aksestoken",
+          in: header,
+          schema: 
+          {$ref: '#/components/schemas/akses'}
+        }
+      ]
+      requestBody: {
+        content: {
+        application/json: {
+        schema: 
+          {$ref: '#/components/schemas/register'}
+        }
+        }
+        }
+      responses:
+        '200':
+          description: OK
+    put:
+      description: ''
+      parameters: [
+        { 
+          name : "aksestoken",
+          in: header,
+          schema: 
+          {$ref: '#/components/schemas/akses'}
+        }
+      ]
+      requestBody: {
+        content: {
+        application/json: {
+        schema: 
+          {$ref: '#/components/schemas/updateUser'}
+        }
+        }
+        }
+      responses:
+        '200':
+          description: OK
+    delete:
+      description: ''
+      parameters: [
+        { 
+          name : "aksestoken",
+          in: header,
+          schema: 
+          {$ref: '#/components/schemas/akses'}
+        }
+      ]
+      requestBody: {
+        content: {
+        application/json: {
+        schema: 
+          {$ref: '#/components/schemas/deleteUser'}
+        }
+        }
+        }
+      responses:
+        '200':
+          description: OK
+  /Movies/{id}:
+    get:
+      tags:
+        - "Movies"
+      description: ''
+      parameters: [
+        { 
+          name : "aksestoken",
+          in: header,
+          schema: 
+          {$ref: '#/components/schemas/akses'}
+        },
+                { 
+          name : id,
+          in: path,
+          required: true,
+          schema: 
+          {$ref: '#/components/schemas/getId'}
+        }
+      ]
+      responses:
+        '200':
+          description: OK
+  /Users/{id}:
+    get:
+      description: ''
+      parameters: [
+        { 
+          name : "aksestoken",
+          in: header,
+          schema: 
+          {$ref: '#/components/schemas/akses'}
+        },
+        { 
+          name : id,
+          in: path,
+          required: true,
+          schema: 
+          {$ref: '#/components/schemas/getId'}
+        }
+      ]
+      responses:
+        '200':
+          description: OK
+
+components:
+  schemas:
+    register : { 
+      type: object,
+      properties:
+      {
+        email : 
+        {
+        type: string,
+        example: "Text@com.com"
+        },
+        password :
+        {
+        type: string,
+        example: "password"
+        },      
+        gender :
+        {
+        type: string,
+        example: "Pria"
+        },      
+        role :
+        {
+        type: string,
+        example: "admin"
+        }      
+      }
+    }
+    login : { 
+      type: object,
+      properties:
+      {
+        email : 
+        {
+        type: string,
+        example: "Text@com.com"
+        },
+        password :
+        {
+        type: string,
+        example: "password"
+        },          
+      }
+    }
+    updateMovie : { 
+      type: object,
+      properties:
+      {
+        title : 
+        {
+        type: string,
+        example: "Pokemon"
+        },
+        genres :
+        {
+        type: string,
+        example: "anime"
+        },          
+        year :
+        {
+        type: integer,
+        example: "2022"
+        },          
+        id :
+        {
+        type: integer,
+        example: "10"
+        },          
+      }
+    }
+    createMovie : { 
+      type: object,
+      properties:
+      {
+        title : 
+        {
+        type: string,
+        example: "Pokemon"
+        },
+        genres :
+        {
+        type: string,
+        example: "anime"
+        },          
+        year :
+        {
+        type: integer,
+        example: "2022"
+        },                    
+      }
+    }
+    deleteMovie : { 
+      type: object,
+      properties:
+      {
+        id : 
+        {
+        type: integer,
+        example: "20"
+        }          
+      }
+    }
+    deleteUser : { 
+      type: object,
+      properties:
+      {
+        id : 
+        {
+        type: integer,
+        example: "20"
+        }   
+      }
+    }
+    updateUser : { 
+      type: object,
+      properties:
+      {
+        email : 
+        {
+        type: string,
+        example: "bukanadmin@gmail.com"
+        },
+        gender :
+        {
+        type: string,
+        example: "wanita"
+        },          
+        password :
+        {
+        type: string,
+        example: "password"
+        },          
+        role :
+        {
+        type: string,
+        example: "admin"
+        },          
+      }
+    }
+    getId : { 
+      type: integer,
+      format: uuid,
+      example: "5",
+    }
+    akses : { 
+      type: string,
+      example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTExLCJlbWFpbCI6IlRleHRAY29tLmNvbSIsImdlbmRlciI6IlByaWEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Nzc5MTM4MzJ9.t2ipHScuH6aIO1XxZ_rgbMibBi201UD_JX04t4QSjcg"
+    }
+
