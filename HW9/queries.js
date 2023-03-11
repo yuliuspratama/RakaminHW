@@ -212,6 +212,7 @@ const createUser = (req,resp) => {
     resp.status(201).json({message :"Users Added"})
 })
 }
+
 const register = (req,resp,next) => {
     console.log(req.body)
     const response = new respon();
